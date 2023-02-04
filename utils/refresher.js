@@ -8,7 +8,7 @@ let gapi = new googleapis.youtube_v3.Youtube({
     auth: authKeys.shift() // Pop and take the first element in an array, when exhausted shift to next, and so on
   })
 
-let pageToken = null
+let nextPageToken = null
 
 const params = {
     part: ['snippet'],
@@ -20,13 +20,14 @@ const params = {
 }
 
 exports.fetchData = () => {
-    if(pageToken != null) {
-        params.pageToken = pageToken
+    //If not first time fetching data then set the page token
+    if(nextPageToken != null) {
+        params.pageToken = nextPageToken
     }
-    console.log(params)
     gapi.search.list(params)
                 .then(response => {
-                    pageToken = response.data.nextPageToken
+                    // store the next page token for next fetch
+                    nextPageToken = response.data.nextPageToken
                     const resultSet = response.data.items.map(item => ({
                         video_id: item.id.videoId,
                         title: item.snippet.title,
