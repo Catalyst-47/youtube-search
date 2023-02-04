@@ -1,6 +1,6 @@
 const { Schema } = require("mongoose");
 
-module.exports = (mongoose, mongoosePaginate) => {
+module.exports = (mongoose) => {
 
     const videoSchema = {
         video_id: {

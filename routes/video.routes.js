@@ -3,8 +3,10 @@ module.exports = app => {
   
     var router = require("express").Router();
   
-    // Create a new Tutorial
+    // Get video with pagination
     router.get("/", videos.getVideos);
+
+    // Search video with Title or Description
     router.get("/search", videos.searchVideos)
   
     app.use('/api/videos', router);
