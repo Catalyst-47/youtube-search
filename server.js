@@ -20,10 +20,16 @@ app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-// refresher.fetchData()
 
-// setInterval(refresher.fetchData, process.env.GOOGLE_API_REFRESH_INTERVAL * 1000)
+// Will fetch data first time
+refresher.fetchData()
 
+
+// Will fetch data in priodical interval of configured seconds
+setInterval(refresher.fetchData, process.env.GOOGLE_API_REFRESH_INTERVAL * 1000)
+
+
+// Connect to mongo database
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
@@ -37,6 +43,8 @@ db.mongoose
     process.exit();
   });
 
+
+// Connect to redis
 redisClient.on('connect', () => {
 console.log('Redis connection established successfully.')
 })
