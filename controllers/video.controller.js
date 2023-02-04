@@ -66,7 +66,7 @@ exports.searchVideos = (req, res) => {
                         // Set cahce data in redis for the search string
                         //TTL is 300 seconds then redis will invalidate
                         redisClient.set(searchString, JSON.stringify(data), 'EX', 300).then(res => {
-                            console.log(`Successfully set key: ${searchString} to Redis. Result: ${data}`)
+                            console.log(`Successfully set key: ${searchString} to Redis.`)
                         }).catch(err => {
                             console.error(`Error setting key: ${searchString} to Redis. Error: ${err}`)
                         })

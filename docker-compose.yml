@@ -1,0 +1,39 @@
+version: "3"
+services:
+  app:
+    build: ./
+    restart: always
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"
+    environment:
+      - GOOGLE_API_KEY=AIzaSyCDwr9n5ddyaGAqJBMsX1HhY31l3YPMq6o
+      - GOOGLE_API_REFRESH_INTERVAL=30
+      - HOST=0.0.0.0
+      - PORT=5000
+      - MONGO_HOST=mongo
+      - MONGO_PORT=27017
+      - MONGO_DBNAME=fampay
+      - REDIS_PORT=6379
+      - REDIS_HOST=redis
+      - YT_SEARCH_QUERY=cricket
+    command:
+      sh -c 'npm i && npm start'
+    links:
+      - mongo
+      - redis
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    environment:
+      MONGO_INITDB_DATABASE: fampay
+    ports:
+      - "27017:27017"
+
+  redis:
+    container_name: redis
+    image: redis
+    expose:
+      - 6379
