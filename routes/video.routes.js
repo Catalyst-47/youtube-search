@@ -5,6 +5,7 @@ module.exports = app => {
   
     // Create a new Tutorial
     router.get("/", videos.getVideos);
+    router.get("/search", videos.searchVideos)
   
     app.use('/api/videos', router);
   };

@@ -4,6 +4,8 @@ const cors = require("cors");
 const db = require("./models");
 const refresher = require("./utils/refresher");
 const app = express();
+const redisClient = require("./redis")
+
 
 require("./routes/video.routes")(app);
 
@@ -35,10 +37,15 @@ db.mongoose
     process.exit();
   });
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Search application." });
-});
+redisClient.on('connect', () => {
+console.log('Redis connection established successfully.')
+})
+
+redisClient.on('error', error => {
+console.log(`Redis connection couldn't be established. ${JSON.stringify(error)}`)
+})
+
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

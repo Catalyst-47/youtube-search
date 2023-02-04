@@ -1,3 +1,3 @@
 module.exports = {
-    url: "mongodb://localhost:27017/search_db"
+    url: `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DBNAME}`
   };

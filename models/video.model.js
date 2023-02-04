@@ -7,7 +7,7 @@ module.exports = (mongoose, mongoosePaginate) => {
           type: String,
           unique: true,
           select: true,
-          trim: true
+          trim: true,
         },
         title: {
           type: String,
@@ -53,7 +53,11 @@ module.exports = (mongoose, mongoosePaginate) => {
     
     const schema = new Schema(videoSchema)
 
-    // schema.plugin(mongoosePaginate)
+    schema.index({
+        title: "text",
+        description: "text"
+    })
+    
     const Video = mongoose.model(
       "video",
       schema
