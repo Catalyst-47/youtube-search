@@ -77,7 +77,7 @@
   Query Params: searchString (Space separated or `|` separated
   
   Sample request:
-  curl --location --request GET 'localhost:5000/api/videos/search?searchString=kohli virat'
+  curl --location --request GET 'HOST:PORT/api/videos/search?searchString=kohli virat'
   
   Sample response:
   {
