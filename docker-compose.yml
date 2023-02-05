@@ -8,7 +8,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - GOOGLE_API_KEY=AIzaSyCDwr9n5ddyaGAqJBMsX1HhY31l3YPMq6o
+      - GOOGLE_API_KEY=YOUR_API_KEY
       - GOOGLE_API_REFRESH_INTERVAL=30
       - HOST=0.0.0.0
       - PORT=5000
