@@ -48,7 +48,7 @@ exports.fetchData = () => {
                                 console.log(`Failed to refresh! Retrying in ${process.env.GOOGLE_API_REFRESH_INTERVAL}s. Error:\n${err}`)
                             })
                 }).catch(err => {
-                    if (err.message.includes("exceeded") && authKeys.length) {
+                    if (err.message.includes("exceeded")) {
                         start_index++
                         const newApiKey = authKeys[start_index % authKeys.length] // Rotate on the same api keys list when you reach at the last index
                         gapi = new googleapis.youtube_v3.Youtube({
