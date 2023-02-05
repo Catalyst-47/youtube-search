@@ -2,10 +2,12 @@ const db = require("../models")
 const googleapis = require('googleapis')
 const Video = db.videos
 
+let start_index = 0
+
 
 const authKeys = process.env.GOOGLE_AUTH_KEYS.split("|")
 let gapi = new googleapis.youtube_v3.Youtube({
-    auth: authKeys.shift() // Pop and take the first element in an array, when exhausted shift to next, and so on
+    auth: authKeys[start_index] // start from 0 index
   })
 
 let nextPageToken = null
@@ -47,7 +49,8 @@ exports.fetchData = () => {
                             })
                 }).catch(err => {
                     if (err.message.includes("exceeded") && authKeys.length) {
-                        const newApiKey = authKeys.shift()
+                        start_index++
+                        const newApiKey = authKeys[start_index % authKeys.length] // Rotate on the same api keys list when you reach at the last index
                         gapi = new googleapis.youtube_v3.Youtube({
                           auth: newApiKey // Replace old API key with the newer one
                         })
