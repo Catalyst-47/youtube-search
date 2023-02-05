@@ -43,6 +43,8 @@
 - Get video api first checks in Redis with key as Page_${page_no} anf if it is able to find it will return it or else it will search in mongo and set redis cache with TTL of 300 seconds and return the data
 - Search api have the same flow as above but the key here would be the search string in redis
 
+- Title and Description are text indexed in mongo to improve search performance(https://www.mongodb.com/docs/manual/core/index-text/)
+
 
 # API
 ## GET VIDEO WITH PAGINATION
