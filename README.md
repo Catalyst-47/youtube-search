@@ -1,4 +1,3 @@
-# Fampay-Assignment
 
 # Prerequisite
 - Install docker
